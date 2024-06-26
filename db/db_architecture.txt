@@ -1,0 +1,9 @@
+
+# Admin User
+Admin.create!(email:"giridhar@tailwebs.com", password:"12345678", name:"giridhar")
+
+rails g model Game name:string code:string
+rails g model GameInstruction game:references game_desc:text status:boolean
+rails g model GameFeedback game:references feedback:text
+rails g model GameAnswer game:references card_code:integer answer_type:string text_answer:text img_answer:text
+

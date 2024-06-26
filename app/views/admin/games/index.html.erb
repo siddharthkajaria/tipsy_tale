@@ -1,0 +1,67 @@
+<%= render "page_header" do %>
+  <%= render "page_header_breadcrumb", title: "Games" do %>
+    <li class="breadcrumb-item"><%= link_to "Admin", admin_path %></li>
+  <% end %>
+
+  <%= render "page_header_actions" do %>
+    <%= link_to "Filters", "#offcanvas_filters", "data-bs-toggle": "offcanvas", class: "btn btn-white" %>
+    <%= link_to "New Game", new_admin_game_path, class: "btn btn-primary" %>
+  <% end %>
+<% end %>
+
+<div class="page-body">
+  <div class="container-xl">
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table table-vcenter table-nowrap card-table table-striped">
+          <thead>
+            <tr>
+              <th><%= sort_link @search, :id %></th>
+              <th><%= sort_link @search, :name %></th>
+              <th><%= sort_link @search, :code %></th>
+              <th class="w-1"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @games.each do |game| %>
+              <tr>
+                <td><%= game.id %></td>
+                <td><%= game.name %></td>
+                <td><%= game.code %></td>
+
+                <td>
+                  <%= link_to "View", admin_game_path(game), class: "btn btn-white btn-sm" %>
+                  <%= link_to "Edit", edit_admin_game_path(game), class: "btn btn-white btn-sm" %>
+                  <%= link_to "Delete", admin_game_path(game), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, form_class: "d-inline", class: "btn btn-white btn-sm" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer d-flex align-items-center fs-5">
+        <div class="d-none d-md-block">
+          <div>Download: <%= link_to "CSV", admin_games_path(format: :csv, q: request.params[:q]) %></div>
+          <%= raw pagy_info(@pagy) %>
+        </div>
+        <div class="ms-auto">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="offcanvas_filters" tabindex="-1" class="offcanvas offcanvas-end">
+  <div class="offcanvas-header">
+    <h2 class="offcanvas-title">Filters</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <%= search_form_for @search, url: admin_games_path, class: "offcanvas-body" do |f| %>
+    <%= f.label :name_cont, "Game Name" %>
+    <%= f.search_field :name_cont %>
+
+    <%= f.submit "Filter", class: "btn btn-primary" %>
+    <%= link_to "Clear Filter", admin_games_path, class: "btn btn-white" %>
+  <% end %>
+</div>
