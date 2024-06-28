@@ -1,0 +1,43 @@
+<%= render "page_header" do %>
+  <%= render "page_header_breadcrumb", title: "Answer detail" do %>
+  <% end %>
+<% end %>
+
+<div class="page-body">
+  <div class="container-xl">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Answer details</h3>
+      </div>
+      <div class="card-body">
+        <dl class="row">
+          <dt class="col-md-3">id</dt>
+          <dd class="col-md-9"><%= @game_answer.id %></dd>
+
+          <dt class="col-md-3">Game Name</dt>
+          <dd class="col-md-9"><%= @game_answer.game.name %></dd>
+
+          <dt class="col-md-3">Card Code</dt>
+          <dd class="col-md-9"><%= @game_answer.card_code %></dd>
+
+          <dt class="col-md-3">Answer Type</dt>
+          <dd class="col-md-9"><%= @game_answer.answer_type %></dd>
+          
+          <dt class="col-md-3">Text Answer</dt>
+          <dd class="col-md-9"><%= @game_answer.text_answer %></dd>
+
+          
+          <dt class="col-md-3">Video Link</dt>
+          <dd class="col-md-9"><%= @game_answer.video_link %></dd>
+
+          <dt class="col-md-3">Image answer</dt>
+          <% if @game_answer.image_answer.attached? %>
+            <dd class="col-md-9"><%= image_tag @game_answer.image_answer, style: "width: 100px; height: 100px;" %></span></dd>
+          <% else %>
+            <dd class="col-md-9"></dd>
+          <% end %>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>

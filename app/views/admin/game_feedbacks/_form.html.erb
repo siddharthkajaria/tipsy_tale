@@ -1,0 +1,44 @@
+<%= form_with(model: [:admin, game_answer]) do |form| %>
+  <div class="form-group row mb-2">
+    <%= form.label "Card Code", class: "form-label col-md-3 col-form-label" %>
+    <div class="col-md px-0">
+      <%= form.text_field :card_code, required: true, autocomplete: "name", class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <%= form.label "Type*", class: 'form-label col-md-3 col-form-label' %>
+    <div class="col-md px-0">
+      <%= form.select :answer_type, ["Text", "video", "Image"], {}, class: 'form-control', required: "required" %>
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <%= form.label "Text answer", class: "form-label col-md-3 col-form-label" %>
+    <div class="col-md px-0">
+      <%= form.text_field :text_answer, autocomplete: "name", class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <%= form.label "Video Link", class: "form-label col-md-3 col-form-label" %>
+    <div class="col-md px-0">
+      <%= form.text_field :video_link, autocomplete: "name", class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="row align-items-center">
+    <div class="col-md">
+      <%= form.label :image_answer, class: 'form-label' %>
+      <div class="col-auto"><span class="avatar avatar-xl admin-avatar" style="background-image: url(<%= form.object.image_answer.url %>)"></span>
+      </div>
+      <%= form.file_field :image_answer, class: 'form-control' %>
+      <%= tag.div @admin.errors[:image_answer].first, class: "invalid-feedback" %>
+    </div>
+  </div>
+
+  <div class="form-footer">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_games_path, class: "btn btn-white" %>
+  </div>
+<% end %>

@@ -1,0 +1,99 @@
+<%= render "page_header" do %>
+  <%= render "page_header_breadcrumb", title: "Feedback" do %>
+  <% end %>
+
+  <%= render "page_header_actions" do %>
+    <%= link_to "Filters", "#offcanvas_filters", "data-bs-toggle": "offcanvas", class: "btn btn-white" %>
+  <% end %>
+<% end %>
+
+<div class="page-body">
+  <div class="container-xl">
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table table-vcenter table-nowrap card-table table-striped">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>Game</th>
+              <th>Feedback</th>
+              <th><%= sort_link @search, :state %></th>
+              <th>Email</th>
+              <th>Contact number</th>
+              <th> Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @game_feedbacks.each do |feedback| %>
+              <tr>
+              
+                <td><%= feedback.id %></td>
+                <td><%= feedback.game.name %></td>
+                <td><%= feedback.feedback %></td>
+                <td><%= feedback.state %></td>
+                <td><%= feedback.email %></td>
+                <td><%= feedback.phone_number %></td>
+
+                <td>
+                    <% if feedback.state == "Open" %>
+                    <%= link_to "In progress", "#", class: "btn btn-warning btn-sm feedback_closed ", data: { feedback_id: feedback.id, state:"inprogress" } %>
+                    <% elsif feedback.state == "Inprogress" %>
+                    <%= link_to "Closed", "#", class: "btn btn-success btn-sm feedback_closed ", id:"kk", data: { feedback_id: feedback.id, state:"closed" } %>
+                    <% end %>
+
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div id="offcanvas_filters" tabindex="-1" class="offcanvas offcanvas-end">
+  <div class="offcanvas-header">
+    <h2 class="offcanvas-title">Filters</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <%= search_form_for @search, url: admin_game_feedbacks_path, class: "offcanvas-body" do |f| %>
+    <%= f.label :state_cont, "Feedback state" %>
+    <%= f.search_field :state_cont %>
+
+    <%= f.submit "Filter", class: "btn btn-primary" %>
+    <%= link_to "Clear Filter", admin_game_feedbacks_path, class: "btn btn-white" %>
+  <% end %>
+</div>
+
+<script>
+
+    $(document).on("click", ".feedback_closed", function(e) {
+        e.preventDefault(); // Prevent the default link behavior
+
+        var feedbackId = $(this).data("feedback-id");
+        var status = $(this).data("state");
+        
+        console.log('lkjhgf')
+
+
+        $.ajax({
+            url: "/admin/game_feedbacks/"+ feedbackId,
+            type: "PUT",
+            dataType: "json",
+            data: { id: feedbackId, status: status },
+            headers: {
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+            window.location.reload(); 
+            console.log("Status updated successfully!");
+            },
+            error: function(xhr, status, error) {
+                window.location.reload(); 
+            console.error("Error updating status:", error);
+            }
+        });
+    });
+
+</script>

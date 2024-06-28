@@ -1,0 +1,31 @@
+<%= form_with(model: [@game, @game_feedback], url: create_friendly_game_feedback_path(@game.slug)) do |form| %>
+  <div class="form-group row mb-2">
+    <%= form.label "Feedback", class: "form-label col-md-3 col-form-label" %>
+    <div class="col-md px-0">
+      <%= form.text_field :feedback, required: true, autocomplete: "name", class: "form-control" %>
+    </div>
+  </div>
+
+  
+
+  <div class="form-group row mb-2">
+    <%= form.label "Email", class: "form-label col-md-3 col-form-label" %>
+    <div class="col-md px-0">
+      <%= form.text_field :email, autocomplete: "name", class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <%= form.label "Contact number", class: "form-label col-md-3 col-form-label" %>
+    <div class="col-md px-0">
+      <%= form.text_field :phone_number, autocomplete: "name", class: "form-control" %>
+    </div>
+  </div>
+
+  
+
+  <div class="form-footer">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", friendly_game_path(@game.slug), class: "btn btn-white" %>
+  </div>
+<% end %>

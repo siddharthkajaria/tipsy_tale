@@ -3,7 +3,7 @@
 # Table name: game_instructions
 #
 #  id         :bigint           not null, primary key
-#  game_desc  :text(65535)
+#  game_rule  :text(65535)
 #  status     :boolean
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

@@ -1,33 +1,245 @@
 <%= render "page_header" do %>
-  <%= render "page_header_breadcrumb", title: @user.email do %>
-    <li class="breadcrumb-item"><%= link_to "Admin", admin_path %></li>
-    <li class="breadcrumb-item"><%= link_to "Users", admin_users_path %></li>
+  <%= render "page_header_breadcrumb", title: @game.name + "- Details" do %>
+    <li class="breadcrumb-item"><%= link_to "Games", admin_path %></li>
   <% end %>
 
-  <%= render "page_header_actions" do %>
-    <%= link_to "Edit user", edit_admin_user_path(@user), class: "btn btn-primary" %>
-    <%= button_to "Delete user", edit_admin_user_path(@user), method: :delete, "data-confirm": "Are you sure?", form_class: "d-inline", class: "btn btn-white" %>
-  <% end %>
 <% end %>
 
 <div class="page-body">
   <div class="container-xl">
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">User details</h3>
+    
+        <div class="row">
+          <div class="card">
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs nav-fill" data-bs-toggle="tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a href="#tabs-details" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 12l-2 0l9 -9l9 9l-2 0"></path><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path></svg>
+                    Details</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a href="#tabs-feedback" class="nav-link" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab"><!-- Download SVG icon from http://tabler-icons.io/i/user -->
+                    <svg  xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-message-circle-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M22 22a2 2 0 0 0 -2 -2h-2a2 2 0 0 0 -2 2" /><path d="M12.454 19.97a9.9 9.9 0 0 1 -4.754 -.97l-4.7 1l1.3 -3.9c-2.324 -3.437 -1.426 -7.872 2.1 -10.374c3.526 -2.501 8.59 -2.296 11.845 .48c1.667 1.423 2.596 3.294 2.747 5.216" /></svg>
+                     Feedbacks</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a href="#tabs-description" class="nav-link" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab"><!-- Download SVG icon from http://tabler-icons.io/i/activity -->
+                    <svg  xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-keyboard-show"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M2 3m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z" /><path d="M6 7l0 .01" /><path d="M10 7l0 .01" /><path d="M14 7l0 .01" /><path d="M18 7l0 .01" /><path d="M6 11l0 .01" /><path d="M18 11l0 .01" /><path d="M10 11l4 0" /><path d="M10 19l2 2l2 -2" /></svg>
+                     Game Rule</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a href="#tabs-answer" class="nav-link" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab"><!-- Download SVG icon from http://tabler-icons.io/i/activity -->
+                    <svg  xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-book"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6l0 13" /><path d="M12 6l0 13" /><path d="M21 6l0 13" /></svg>
+                     Answer</a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="tab-pane active show" id="tabs-details" role="tabpanel">
+                  <dl class="row">
+                    <dt class="col-md-3">Name</dt>
+                    <dd class="col-md-9"><%= @game.name %></dd>
+
+                    <dt class="col-md-3">Code</dt>
+                    <dd class="col-md-9"><%= @game.code %></dd>
+
+                    <dt class="col-md-3">Description</dt>
+                    <dd class="col-md-9"><%= @game.game_desc %></dd>
+
+                    <dt class="col-md-3">Created at</dt>
+                    <dd class="col-md-9"><%= l(@game.created_at, format: :long) %></dd>
+
+                    <dt class="col-md-3"> Last Updated at</dt>
+                    <dd class="col-md-9"><%= l(@game.updated_at, format: :long) %></dd>
+
+                    <dt class="col-md-3">Image</dt>
+                    <% if @game.image.attached? %>
+                      <dd class="col-md-9"><%= image_tag @game.image, style: "width: 100px; height: 100px;" %></span></dd>
+                    <% end %>
+                  </dl>
+                </div>
+                <div class="tab-pane" id="tabs-feedback" role="tabpanel">
+                  <div class="table-responsive">
+                    <table class="table table-vcenter card-table">
+                      <thead>
+                        <tr>
+                          <th>id</th>
+                          <th>Date</th>
+                          <th>Feedback</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% @game_feedbacks.each do |feedback| %>
+                          <tr>
+                            <td><%=feedback.id%></td>
+                            <td><%=feedback.created_at.to_date%></td>
+                            <td><%=feedback.feedback%></td>
+                          </tr>
+                        <%end%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tabs-description" role="tabpanel">
+                  <% if @game_instruction.present? %>
+                    <div id="summernote"><%= @game_instruction.game_rule.html_safe %></div>
+                  <% else %>
+                    <div id="summernote"></div>
+                  <% end %>
+                  <input type="hidden" id="game_id" value="<%= @game.id %>">
+                  <button id="submit-content" class="btn btn-primary mt-2" style="float:right;">Submit</button>
+                </div>
+                <div class="tab-pane" id="tabs-answer" role="tabpanel">
+                  <%= link_to 'Download Sample Excel', '/answer_sheet.xlsx', download: 'sample_answer_sheet.xlsx', class: 'btn btn-primary m-2', style:"float:right;" %>
+                  <button type="button" class="btn btn-primary m-2 mb-4" data-bs-toggle="modal" data-bs-target="#uploadExcelModal" style="float:right;">
+                    Upload Excel
+                  </button>
+                  <table class="table table-vcenter card-table">
+                    <thead>
+                      <tr>
+                        <th>id</th>
+                        <th>Card Code</th>
+                        <th>Answer Type</th>
+                        <th>Text Answer</th>
+                        <th>Video Answer</th>
+                        <th>Image Answer</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @game_answers.each do |answer| %>
+                        <tr>
+                          <td><%=answer.id%></td>
+                          <td><%=answer.card_code%></td>
+                          <td><%=answer.answer_type%></td>
+                          <td><%=answer.text_answer%></td>
+                          <% if answer.video_link.present? %>
+                            <td><%= link_to 'Watch Video', answer.video_link, class: 'btn btn-primary', target: '_blank' %></td>
+                          <% else %>
+                            <td></td>
+                          <% end %>
+
+                          <% if answer.image_answer.attached? %>
+                            <td><%= image_tag answer.image_answer, style: "width: 30px; height: 30px;" %></td>
+                          <% else %>
+                            <td></td>
+                          <% end %>
+                          
+                          <td>
+                            <%= link_to "View", admin_game_answer_path(answer), class: "btn btn-primary btn-sm" %>
+                            <%= link_to "Edit", edit_admin_game_answer_path(answer), class: "btn btn-warning btn-sm" %>
+                            <%= link_to "Delete", admin_game_answer_path(answer), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, form_class: "d-inline", class: "btn btn-danger btn-sm" %>
+
+                          </td>
+                        </tr>
+                      <%end%>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="uploadExcelModal" tabindex="-1" aria-labelledby="uploadExcelModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadExcelModalLabel">Upload Excel</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="card-body">
-        <dl class="row">
-          <dt class="col-md-3">Email</dt>
-          <dd class="col-md-9"><%= @user.email %></dd>
-
-          <dt class="col-md-3">Created at</dt>
-          <dd class="col-md-9"><%= l(@user.created_at, format: :long) %></dd>
-
-          <dt class="col-md-3">Updated at</dt>
-          <dd class="col-md-9"><%= l(@user.updated_at, format: :long) %></dd>
-        </dl>
+      <div class="modal-body">
+        <form id="excelUploadForm" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="excelFile" class="form-label">Choose Excel File</label>
+            <input class="form-control" type="file" id="excelFile" name="excel_file">
+          </div>
+          <input type="hidden" id="game_id" value="<%= @game.id %>">
+          <button type="button" class="btn btn-primary" id="uploadExcelBtn">Upload</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Initialize Quill editor -->
+<script>
+
+  $(document).ready(function() {
+    $('#summernote').summernote({
+      height: 300,  // set the minimum height
+      toolbar: [
+        // [groupName, [list of button]]
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', 'subscript']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['insert', ['link', 'video', 'table', 'hr']],
+        ['view', ['codeview', 'help']]
+      ],
+      callbacks: {
+        onImageUpload: function(files) {
+          // Implement image upload logic here if needed
+        }
+      }
+    });
+  });
+
+  $('#submit-content').on('click', function() {
+    var content = $('#summernote').summernote('code');
+    var gameId = $('#game_id').val();
+
+    $.ajax({
+      url: '/admin/game_instructions',  // Your controller action path
+      type: 'POST',
+      data: { content: content, id: gameId },
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function(response) {
+        alert('Content saved successfully!');
+      },
+      error: function(xhr, status, error) {
+        console.error('Failed to save content: ', error);
+      }
+    });
+  });
+
+  // Excel upload modal
+  $('#uploadExcelBtn').on('click', function() {
+      var formData = new FormData($('#excelUploadForm')[0]);
+      formData.append('id', $('#game_id').val());
+
+      $.ajax({
+        url: '/admin/game_answers/upload_excel',  // Your controller action path
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        headers: {
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+          alert('Excel file uploaded successfully!');
+          location.reload();  // Optionally reload the page to see the changes
+        },
+        error: function(xhr, status, error) {
+          console.error('Failed to upload Excel file: ', error);
+        }
+      });
+    });
+
+
+</script>
+
+

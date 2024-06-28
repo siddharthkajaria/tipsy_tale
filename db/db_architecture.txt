@@ -7,3 +7,10 @@ rails g model GameInstruction game:references game_desc:text status:boolean
 rails g model GameFeedback game:references feedback:text
 rails g model GameAnswer game:references card_code:integer answer_type:string text_answer:text img_answer:text
 
+rails g migration AddVideoLinkToGameAnswer video_link:text
+rails g migration AddFieldToGame game_description:text image:text
+rails generate migration RenameGameDescToGameRule
+rails g migration AddstateToGameGameFeedback state:string
+rails g migration AddEmailToGameGameFeedback email:string phone_number:integer
+
+

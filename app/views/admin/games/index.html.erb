@@ -1,6 +1,5 @@
 <%= render "page_header" do %>
   <%= render "page_header_breadcrumb", title: "Games" do %>
-    <li class="breadcrumb-item"><%= link_to "Admin", admin_path %></li>
   <% end %>
 
   <%= render "page_header_actions" do %>
@@ -19,6 +18,7 @@
               <th><%= sort_link @search, :id %></th>
               <th><%= sort_link @search, :name %></th>
               <th><%= sort_link @search, :code %></th>
+              <th><%= sort_link @search, :game_desc %></th>
               <th class="w-1"></th>
             </tr>
           </thead>
@@ -28,6 +28,7 @@
                 <td><%= game.id %></td>
                 <td><%= game.name %></td>
                 <td><%= game.code %></td>
+                <td><%= game.game_desc %></td>
 
                 <td>
                   <%= link_to "View", admin_game_path(game), class: "btn btn-white btn-sm" %>
@@ -39,15 +40,7 @@
           </tbody>
         </table>
       </div>
-      <div class="card-footer d-flex align-items-center fs-5">
-        <div class="d-none d-md-block">
-          <div>Download: <%= link_to "CSV", admin_games_path(format: :csv, q: request.params[:q]) %></div>
-          <%= raw pagy_info(@pagy) %>
-        </div>
-        <div class="ms-auto">
-
-        </div>
-      </div>
+      
     </div>
   </div>
 </div>

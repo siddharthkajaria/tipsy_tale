@@ -1,0 +1,15 @@
+<%= render "page_header" do %>
+  <%= render "page_header_breadcrumb", title: "New Answer Key" do %>
+    <li class="breadcrumb-item"><%= link_to "Games", admin_path %></li>
+  <% end %>
+<% end %>
+
+<div class="page-body">
+  <div class="container-xl">
+    <div class="card">
+      <div class="card-body">
+        <%= render "form", game_answer: @game_answer %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,7 +2,7 @@
 
 class Admin::GamesController < Admin::BaseController
   before_action :set_admin
-  before_action :set_game, only: %i[update destroy]
+  before_action :set_game, only: %i[show edit update destroy]
 
 
   def index
@@ -15,7 +15,12 @@ class Admin::GamesController < Admin::BaseController
     end
   end
 
-  def show; end
+  def show
+    @game_feedbacks = @game.game_feedbacks.order(created_at: :desc)
+    @game_instruction = @game.game_instructions.where(:status=>true).first
+    @game_answers = @game.game_answers
+
+  end
 
   def new
     @game = Game.new
@@ -34,6 +39,8 @@ class Admin::GamesController < Admin::BaseController
   end
 
   def update
+        
+    @game.code = game_params[:name].parameterize.underscore
     if @game.update(game_params)
       redirect_to admin_games_path, notice: 'Game was successfully updated.'
     else
@@ -53,10 +60,17 @@ class Admin::GamesController < Admin::BaseController
   end
 
   def set_game
-    @game = Game.find(params[:id])
+        
+    if params[:slug].present?
+      @game = Game.friendly.find_by(slug: params[:slug])
+    else
+      @game = Game.find(params[:id])
+    end
+    
+    # @game = Game.friendly.find_by(slug: params[:slug]) || Game.find(params[:id])
   end
 
   def game_params
-    params.require(:game).permit(:name, :code)
+    params.require(:game).permit(:name, :game_desc, :image, :slug)
   end
 end
