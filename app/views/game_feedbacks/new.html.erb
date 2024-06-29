@@ -1,9 +1,61 @@
-<div class="page-body">
-  <div class="container-xl">
-    <div class="card">
-      <div class="card-body">
-        <%= render "form", game_feedback: @game_feedback %>
+<div class="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+          <div class="bg-grey h-100vh overflow-style">
+            <%= render 'shared/navbar_back' %>
+
+            <div class="position-relative">
+              <div class="bg-yellow h-250px br-style-1">
+                <div class="m-auto h-100 d-flex justify-content-center text-center">
+                  <div class="mt-5">
+                    <div class="mb-3">
+                      <%= image_tag url_for(@game.image), style: 'width: 30px; height: 30px;' if @game.image.attached? %>
+                    </div>
+                    <div>
+                      <h3>
+                        <%= @game.name%>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="position-absolute top-70p">
+                <div class="card-style-1">
+                  <div class="text-center">
+                    <div>
+                      <div class="mb-3">
+                        <h2 class="heading-style-1">Give your valuable Feedback to get better for you</h2>
+                      </div>
+                      <div class="mb-4">
+                        <p><%= @game.game_desc %></p>
+                      </div>
+                        <%= render "form", game_feedback: @game_feedback %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("answer").focus();
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+

@@ -1,1 +1,114 @@
-enter code here and then make a ajax call to fetch the answer and based on the type show the answer.
+<div class="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+  
+        </div>
+        <div class="col-md-4">
+          <div class="bg-grey h-100vh overflow-style">
+            <%= render 'shared/navbar_back' %>
+            <div class="position-relative">
+              <div class="bg-yellow h-250px br-style-1">
+                <div class="m-auto h-100 d-flex justify-content-center text-center">
+                  <div class="mt-5">
+                    <div class="mb-3">
+                      <%= image_tag url_for(@game.image), style: 'width: 30px; height: 30px;' if @game.image.attached? %>
+                    </div>
+                    <div>
+                      <h3>
+                        <%= @game.name%>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="position-absolute top-70p">
+                <div class="card-style-1">
+                  <div class="text-center">
+                    <div>
+                      <div class="mb-4">
+                        <p><%= @game.game_desc %></p>
+                      </div>
+                      <div class="container mt-4">
+                        <div class="border-1 bg-grey-2 br-10 p-2">
+                          <div class="row align-items-center">
+                            <div class="col-4 px-2">
+                              <label for="answer" class="text-style-2">Answer Key:</label>
+                            </div>
+                            <div class="col-5 px-2">
+                              <input type="text" id="answer" class="form-control custom-input" placeholder="000" name="answer">
+                            </div>
+                            <div class="col-3 px-2">
+                              <button type="button" class="btn btn-primary btn-style-2" id="card-code">OK</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-style-1 bg-grey border-1 mt-5 d-none" id="answer-card">
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("answer").focus();
+    });
+    $("#card-code").click(()=>{
+        var code = $('#answer').val();
+        var slug = '<%= @game.slug %>';
+      
+        $.ajax({
+            url: '/<%= @game.slug %>/answer/' + code,
+            type: 'GET',
+            dataType: 'json',
+            data: { code: code, slug: slug },
+            success: function(response) {
+                // Handle the response based on answer_type
+                var answerType = response.answer_type;
+                var answerText = response.text_answer;
+                var answerVideo = response.video_link;
+                var answerImage = response.image_answer;
+
+                console.log()
+
+                $('#answer-card').removeClass('d-none');
+
+                // Show/hide div based on answer_type
+                $('#answer-card').removeClass('d-none');
+                if (answerType === 'text') {
+                $('#answer-card').removeClass('d-none');
+                $('#answer-card').html('<p>Answer: ' + answerText + '</p>');
+            } else if (answerType === 'video') {
+                var videoHtml = '<a href="' + answerVideo + '" class="btn btn-primary" target="_blank">Watch Video</a>';
+                $('#answer-card').html(videoHtml);
+            } else if (answerType === 'Image'){
+                var imageHtml = '<img src="' + answerImage + '" style="width: 30px; height: 30px;">';
+                $('#answer-card').html(imageHtml);
+            } 
+            else {
+                console.error('Unknown answer type:', answerType);
+            }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:');
+            }
+        });
+    })
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

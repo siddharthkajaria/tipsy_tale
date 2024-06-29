@@ -1,3 +1,100 @@
-<h1>Show call </h1>
-<p>Find me in app/views/home/index.html.erb</p>
-<%= @game.name %>
+<div class="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+          <div class="bg-grey h-100vh overflow-style">
+            <%= render 'shared/navbar' %>
+
+            <div class="position-relative">
+              <div class="bg-yellow h-250px br-style-1">
+                <div class="m-auto h-100 d-flex justify-content-center text-center">
+                  <div class="mt-5">
+                    <div class="mb-3">
+                      <%= image_tag url_for(@game.image), style: 'width: 30px; height: 30px;' if @game.image.attached? %>
+                    </div>
+                    <div>
+                      <h3>
+                        <%= @game.name%>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="position-absolute top-70p">
+                <div class="card-style-1">
+                  <div class="text-center">
+                    <div>
+                      <div class="mb-4">
+                        <p><%= @game.game_desc %></p>
+                      </div>
+                      <div class="py-2 px-2">
+                        <%= link_to friendly_game_answer_path(@game.slug), class: 'btn btn-style-1', aria: { label: 'Answer Key' }, title: 'Answer Key' do %>
+                        Answer Key
+                        <% end %>
+
+                      </div>
+                      <div class="py-2 px-2">
+                        <%= link_to friendly_game_instruction_path(@game.slug), class: 'btn btn-style-1', aria: { label: 'How to Play' }, title: 'How to Play' do %>
+                            How to Play
+                        <% end %>
+
+                      </div>
+                      <div class="py-2 px-2">
+                        <a href="https://www.thetipsytale.com/">
+                            <button class="btn btn-style-1" aria-label="View more Products" title="View more Products">
+                            View more Products
+                            </button>
+                        </a>
+                      </div>
+                      <div class="py-2 px-2">
+                        <%= link_to friendly_game_feedback_path(@game.slug), class: 'btn btn-style-1', aria: { label: 'Give your Feedback' }, title: 'Give your Feedback' do %>
+                        Give your Feedback
+                        <% end %>
+
+                      </div>
+                    </div>
+                    <div class="mt-5">
+                      <div class="d-flex align-items-center justify-content-center">
+                        <div class="w-10p mx-2">
+                          <img src="/assets/logo-li.png" class="w-100p" alt="logo-insta" title="logo-insta">
+                        </div>
+                        <div class="w-10p mx-2">
+                          <img src="/assets/logo-insta.png" class="w-100p" alt="logo-insta" title="logo-insta">
+                        </div>
+                        <div class="w-10p mx-2">
+                          <img src="/assets/logo-fb.png" class="w-100p" alt="logo-fb" title="logo-fb">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <p class="text-style-1">It is a long established fact that a reader will be distracted by the
+                        readable
+                        content of a page when looking at its
+                        layout. </p>
+                    </div>
+                    <div class="mt-3">
+                      <div class="w-10p m-auto">
+                        <img src="/assets/yellow-slash.png" class="w-100p" alt="yellow-slash" title="yellow-slash">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>

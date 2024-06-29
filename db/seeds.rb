@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-Admin.create(email: 'admin@gmail.com', name: 'Admin', password: 'Password9257@admin!!', password_confirmation: "Password9257@admin!!")
+Admin.create(email: 'admin@gmail.com', name: 'Admin', password: '12345678', password_confirmation: "12345678")
 
 game_names = ["Drink If","Taboo"]
 game_names.each do |g|

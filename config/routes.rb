@@ -36,5 +36,6 @@ Rails.application.routes.draw do
   post ':slug/feedback', to: 'game_feedbacks#create', as: :create_friendly_game_feedback
   get ':slug/rule', to: 'game_instructions#show', as: :friendly_game_instruction
   get ':slug/answer', to: 'game_answers#card_code', as: :friendly_game_answer
+  get ':slug/answer/:code', to: 'game_answers#show', as: :friendly_game_answer_code
 
 end
