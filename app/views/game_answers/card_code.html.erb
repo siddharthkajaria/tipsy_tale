@@ -79,9 +79,10 @@
             success: function(response) {
                 // Handle the response based on answer_type
                 var answerType = response.answer_type;
+
                 var answerText = response.text_answer;
                 var answerVideo = response.video_link;
-                var answerImage = response.image_answer;
+                var answerImage = response.image_answer ? response.image_answer : undefined;
 
                 console.log()
 
