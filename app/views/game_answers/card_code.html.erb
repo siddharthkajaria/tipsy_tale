@@ -45,8 +45,9 @@
                         </div>
                       </div>
                     </div>
-                    <div class="card-style-1 bg-grey border-1 mt-5 d-none" id="answer-card">
-                      
+                    <label id="answer-card-label" for="answer-content" class="d-none" style="margin-top:30px;">Answer:</label>
+                    <div class="card-style-1 bg-grey border-1 mt-2 d-none" id="answer-card">
+                        <div id="answer-card-inner" aria-labelledby="answer-card-label"></div>
                     </div>
                   </div>
                 </div>
@@ -87,18 +88,18 @@
                 console.log()
 
                 $('#answer-card').removeClass('d-none');
+                $('#answer-card-label').removeClass('d-none');
 
                 // Show/hide div based on answer_type
                 $('#answer-card').removeClass('d-none');
                 if (answerType === 'text') {
-                $('#answer-card').removeClass('d-none');
-                $('#answer-card').html('<p>Answer: ' + answerText + '</p>');
+                $('#answer-card-inner').html('<strong><p>' + answerText + '</p></strong>');
             } else if (answerType === 'video') {
-                var videoHtml = '<a href="' + answerVideo + '" class="btn btn-primary" target="_blank">Watch Video</a>';
-                $('#answer-card').html(videoHtml);
+                var videoHtml = '<a href="' + answerVideo + '" class="btn" style="background-color:#CF4B83; color:#fff" target="_blank"><i class="fa-regular fa-circle-play" style="margin-right:7px; color:#fff"></i> Watch Video</a>';
+                $('#answer-card-inner').html(videoHtml);
             } else if (answerType === 'Image'){
-                var imageHtml = '<img src="' + answerImage + '" style="width: 30px; height: 30px;">';
-                $('#answer-card').html(imageHtml);
+                var imageHtml = '<img src="' + answerImage + '" style="width: 100%;">';
+                $('#answer-card-inner').html(imageHtml);
             } 
             else {
                 console.error('Unknown answer type:', answerType);
