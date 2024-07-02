@@ -10,17 +10,36 @@
     </h1>
     
       <div class="nav-item dropdown">
-        <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+        <a href="#" class="nav-link d-flex lh-1 text-reset p-0 dropdown-toggle" id="navbarDropdown" role="button" aria-label="Open user menu">
           <span class="avatar avatar-sm" style="background-image: url(<%= current_admin.avatar.url %>)"></span>
           <div class="d-none d-xl-block ps-2">
             <div><%= current_admin.name %></div>
           </div>
         </a>
-        <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-          <%= link_to 'Profile & account', admin_profile_index_path, class: 'dropdown-item' %>
-          <%= button_to "Logout", destroy_admin_session_path, method: :delete, class: "dropdown-item" %>
-        </div>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" aria-labelledby="navbarDropdown">
+          <li><%= link_to 'Profile & account', admin_profile_index_path, class: 'dropdown-item' %></li>
+          <li><%= button_to "Logout", destroy_admin_session_path, method: :delete, class: 'dropdown-item' %></li>
+        </ul>
       </div>
+
     </div>
   </div>
 </header>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const dropdownToggle = document.getElementById('navbarDropdown');
+  const dropdownMenu = document.querySelector('.dropdown-menu');
+
+  dropdownToggle.addEventListener('click', (event) => {
+    event.preventDefault();
+    dropdownMenu.classList.toggle('show');
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+      dropdownMenu.classList.remove('show');
+    }
+  });
+});
+</script>

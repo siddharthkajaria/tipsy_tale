@@ -67,6 +67,10 @@
                           <th>id</th>
                           <th>Date</th>
                           <th>Feedback</th>
+                          <th>Email</th>
+                          <th>Phone</th>
+                          <th>State</th>
+
                         </tr>
                       </thead>
                       <tbody>
@@ -75,6 +79,10 @@
                             <td><%=feedback.id%></td>
                             <td><%=feedback.created_at.to_date%></td>
                             <td><%=feedback.feedback%></td>
+                            <td><%=feedback.email%></td>
+                            <td><%=feedback.phone_number%></td>
+                            <td><%=feedback.state%></td>
+
                           </tr>
                         <%end%>
                       </tbody>

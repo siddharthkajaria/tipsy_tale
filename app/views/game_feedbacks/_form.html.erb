@@ -1,27 +1,50 @@
-<%= form_with(model: [@game, @game_feedback], url: create_friendly_game_feedback_path(@game.slug)) do |form| %>
+<%= form_with(model: [@game, @game_feedback], url: create_friendly_game_feedback_path(@game.slug), id: "feedbackForm") do |form| %>
   <div class="form-group row mb-2">
     <div class="col-md px-0">
       <%= form.text_area :feedback, required: true, placeholder: "Enter your feedback", class: "form-control", rows: 4 %>
     </div>
   </div>
-
   
-
   <div class="form-group row mb-2">
     <div class="col-md px-0">
-      <%= form.text_field :email, required: true, placeholder: "Enter your email", class: "form-control" %>
+      <%= form.text_field :email, required: true, placeholder: "Enter your email", class: "form-control", id: "emailField" %>
     </div>
   </div>
-
+  
   <div class="form-group row mb-2">
     <div class="col-md px-0">
       <%= form.text_field :phone_number, autocomplete: "name", placeholder: "Enter your Contact number", class: "form-control", required: false %>
     </div>
   </div>
-
   
-
   <div class="form-footer">
     <%= form.submit class: "btn btn-primary btn-style-2 py-3 w-100p" %>
   </div>
 <% end %>
+
+
+<script>
+  // app/javascript/packs/application.js
+  // app/javascript/packs/application.js
+  document.addEventListener('DOMContentLoaded', () => {
+    const feedbackForm = document.getElementById('feedbackForm');
+    const emailField = document.getElementById('emailField');
+
+    feedbackForm.addEventListener('submit', (event) => {
+      const email = emailField.value;
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(email)) {
+        event.preventDefault();
+        alert('Please enter a valid email address.');
+      } else {
+        // Clear the form after successful AJAX submission
+        feedbackForm.addEventListener('ajax:success', () => {
+          feedbackForm.reset();
+        });
+      }
+    });
+  });
+
+
+</script>
