@@ -29,24 +29,23 @@
                 <div class="row">
                     <% @games.each do |game| %>
                         <div class="col-6 mt-3">
-                            <a href="" class="text-decor">
-                            <% if game.image.attached? %>
-                                <div class="card-style-2 h-150px" style="<%= 'background: url(' + url_for(game.image) + ') no-repeat; background-position: center; background-size: cover;' if game.image.attached? %>">
+                            <a href="<%= friendly_game_path(game) %>" class="text-decor">
+                                <% if game.image.attached? %>
+                                <div class="card-style-2 h-150px" style="<%= 'background: url(' + url_for(game.image) + ') no-repeat; background-position: center; background-size: cover;' %>">
                                 </div>
-                            <% else %>
+                                <% else %>
                                 <div class="card-style-2 h-150px"
                                     style="background: url('/assets/sample11.jpg') no-repeat; background-position: center; background-size: cover;">
                                 </div>
-                            <% end %>
-                            <div class="text-center mt-2">
+                                <% end %>
+                                <div class="text-center mt-2">
                                 <h3 class="text-style-2 black-2">
-                                <b><%= game.name%></b>
+                                    <b><%= game.name %></b>
                                 </h3>
-                            </div>
+                                </div>
                             </a>
                         </div>
                     <% end %>
-                  
                 </div>
               </div>
             </div>
