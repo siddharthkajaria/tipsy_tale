@@ -42,12 +42,15 @@
                     </div>
                     <label id="answer-card-label" for="answer-content" class="d-none" style="margin-top:30px;">Answer:</label>
                     <div class="card-style-1 bg-grey border-1 mt-2 d-none" id="answer-card">
-                        <div id="answer-card-inner" aria-labelledby="answer-card-label"></div>
+                      <div id="answer-card-inner" aria-labelledby="answer-card-label"></div>
+                    </div>
+                    <div class="text-center mt-3 d-none" id="clear-btn-container">
+                      <button class="btn btn-secondary btn-style-2" id="clear-answer">Clear</button>
                     </div>
                   </div>
                 </div>
                 <div class="card-style-1 bg-grey border-1 mt-5 d-none" id="answer-card">
-                  
+                   
                 </div>
               </div>
             </div>
@@ -82,6 +85,7 @@
 
                 $('#answer-card').removeClass('d-none');
                 $('#answer-card-label').removeClass('d-none');
+                $('#clear-btn-container').removeClass('d-none');
 
                 // Show/hide div based on answer_type
                 $('#answer-card').removeClass('d-none');
@@ -97,10 +101,19 @@
             else {
                 console.error('Unknown answer type:', answerType);
             }
+            
             },
             error: function(xhr, status, error) {
                 console.error('Error:');
             }
         });
-    })
+    });
+    // Clear button functionality
+      $("#clear-answer").click(() => {
+        $('#answer').val('');
+        $('#answer-card').addClass('d-none');
+        $('#answer-card-label').addClass('d-none');
+        $('#answer-card-inner').html('');
+        $('#clear-btn-container').addClass('d-none');
+      });
   </script>
