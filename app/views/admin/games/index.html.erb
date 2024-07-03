@@ -28,7 +28,7 @@
                 <td><%= game.id %></td>
                 <td><%= game.name %></td>
                 <td><%= game.code %></td>
-                <td><%= game.game_desc %></td>
+                <td><%= truncate(game.game_desc, length: 20) %></td>
 
                 <td>
                   <%= link_to "View", admin_game_path(game), class: "btn btn-white btn-sm" %>

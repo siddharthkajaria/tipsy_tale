@@ -20,9 +20,9 @@ class Game < ApplicationRecord
 
     has_one_attached :image
 
-    has_many :game_feedbacks
-    has_many :game_instructions
-    has_many :game_answers
+    has_many :game_feedbacks, dependent: :destroy
+    has_many :game_instructions, dependent: :destroy
+    has_many :game_answers, dependent: :destroy
 
     before_save :generate_slug
 
