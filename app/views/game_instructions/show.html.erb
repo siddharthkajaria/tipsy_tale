@@ -19,12 +19,17 @@
                 <h2 class="heading-style-1"><%= @game.name%></h2>
               </div>
               <div class="mb-4">
-
-                <p><%= @game.game_desc %></p>
+                <% if @game.game_desc.present? %>
+                  <p><%= @game.game_desc %></p>
+                <% end %>
               </div>
             </div>
             <div>
-              <%= @rule.game_rule.html_safe  %>
+              <% if @rule.present? %>
+                <%= @rule.game_rule.html_safe  %>
+              <% else %>
+                <p>Game Rules not present</p>
+              <% end %>
             </div>
           </div>
         </div>
