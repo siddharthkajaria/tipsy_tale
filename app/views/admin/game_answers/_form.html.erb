@@ -9,7 +9,7 @@
   <div class="form-group row mb-2">
     <%= form.label "Type*", class: 'form-label col-md-3 col-form-label' %>
     <div class="col-md px-0">
-      <%= form.select :answer_type, ["Text", "video", "Image"], {}, class: 'form-control', required: "required" %>
+      <%= form.select :answer_type, ["video", "Image"], {}, class: 'form-control', required: "required" %>
     </div>
   </div>
 
@@ -26,12 +26,20 @@
       <%= form.text_field :video_link, autocomplete: "name", class: "form-control" %>
     </div>
   </div>
+  <div class="form-group row mb-2">
+    <%= form.label "Video Link", class: "form-label col-md-3 col-form-label" %>
+    <div class="col-md px-0">
+      <%= form.text_field :image_url, autocomplete: "name", class: "form-control" %>
+    </div>
+  </div>
 
   <div class="row align-items-center">
     <div class="col-md">
       <%= form.label :image_answer, class: 'form-label' %>
+      <%if form.object.image_answer.url.present? %>
       <div class="col-auto"><span class="avatar avatar-xl admin-avatar" style="background-image: url(<%= form.object.image_answer.url %>)"></span>
       </div>
+      <%end%>
       <%= form.file_field :image_answer, class: 'form-control' %>
       <%= tag.div @admin.errors[:image_answer].first, class: "invalid-feedback" %>
     </div>

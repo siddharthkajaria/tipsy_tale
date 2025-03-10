@@ -15,35 +15,6 @@ class Admin::GameAnswersController < Admin::BaseController
 
   def edit; end
 
-  # def upload_excel
-  #   file = params[:excel_file]
-
-  #   if file.present?
-  #     # Process the file here (e.g., using the Roo gem to parse Excel files)
-  #     spreadsheet = Roo::Spreadsheet.open(file.path)
-  #     header = spreadsheet.row(1)
-
-  #     (2..spreadsheet.last_row).each do |i|
-  #       row = Hash[[header, spreadsheet.row(i)].transpose]
-  #       # Assuming your GameAnswer model has attributes :card_code, :answer_type, :text_answer, :img_answer
-  #       game_answer = @game.game_answers.new(
-  #         card_code: row['card_code'],
-  #         answer_type: row['answer_type'],
-  #         text_answer: row['text_answer'],
-  #         video_link: row['video_link']
-
-  #       )
-  #       game_answer.save!
-  #     end
-  #     render json: { message: 'File processed successfully' }, status: :ok
-  #   else
-  #     render json: { error: 'No file uploaded' }, status: :unprocessable_entity
-  #   end
-  # rescue => e
-  #   render json: { error: e.message }, status: :unprocessable_entity
-    
-  # end
-
   def upload_excel
     file = params[:excel_file]
   
@@ -120,6 +91,6 @@ class Admin::GameAnswersController < Admin::BaseController
   end
 
   def game_answer_params
-    params.require(:game_answer).permit(:card_code,:answer_type,:text_answer,:video_link,:img_answer, :image_answer)
+    params.require(:game_answer).permit(:card_code,:answer_type,:text_answer,:image_url,:video_link,:img_answer, :image_answer)
   end
 end

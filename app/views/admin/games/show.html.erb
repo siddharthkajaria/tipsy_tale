@@ -129,10 +129,12 @@
                           <% end %>
 
                           <% if answer.image_answer.attached? %>
-                            <td><%= image_tag answer.image_answer, style: "width: 30px; height: 30px;" %></td>
-                          <% else %>
-                            <td></td>
-                          <% end %>
+                          <td><%= image_tag answer.image_answer, style: "width: 30px; height: 30px;" %></td>
+                        <% elsif answer.image_url.present? %>
+                          <td><%= image_tag answer.image_url, style: "width: 30px; height: 30px;" %></td>
+                        <% else %>
+                          <td></td>
+                        <% end %>
                           
                           <td>
                             <%= link_to "View", admin_game_answer_path(answer), class: "btn btn-primary btn-sm" %>
