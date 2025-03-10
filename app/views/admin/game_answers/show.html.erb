@@ -37,7 +37,7 @@
           <% if @game_answer.image_answer.attached? %>
           <dd class="col-md-9"><%= image_tag @game_answer.image_answer, style: "width: 100px; height: 100px;" %></span></dd>
         <% elsif @game_answer.image_url.present? %>
-          <td><%= image_tag @game_answer.image_url,style: "width: 100px; height: 100px;" %></td>
+          <dd><%= image_tag @game_answer.image_url,style: "width: 100px; height: 100px;" %></dd>
         <% else %>
         <dd class="col-md-9"></dd>
         <% end %>
