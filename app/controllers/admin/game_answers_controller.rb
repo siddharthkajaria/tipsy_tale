@@ -63,7 +63,8 @@ class Admin::GameAnswersController < Admin::BaseController
           card_code: row['card_code'],
           answer_type: row['answer_type'],
           text_answer: row['text_answer'],
-          video_link: row['video_link']
+          video_link: row['video_link'],
+          image_url: row['image_link']
         )
   
         if game_answer.save
