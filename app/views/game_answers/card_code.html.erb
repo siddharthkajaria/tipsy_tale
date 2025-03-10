@@ -74,14 +74,11 @@
             dataType: 'json',
             data: { code: code, slug: slug },
             success: function(response) {
-                // Handle the response based on answer_type
-                var answerType = response.answer_type;
+              var answerType = response.answer_type?.toLowerCase();
 
                 var answerText = response.text_answer;
                 var answerVideo = response.video_link;
                 var answerImage = response.image_answer ? response.image_answer : undefined;
-
-                console.log()
 
                 $('#answer-card').removeClass('d-none');
                 $('#answer-card-label').removeClass('d-none');
@@ -94,7 +91,7 @@
             } else if (answerType === 'video') {
                 var videoHtml = '<a href="' + answerVideo + '" class="btn" style="background-color:#CF4B83; color:#fff" target="_blank"><i class="fa-regular fa-circle-play" style="margin-right:7px; color:#fff"></i> Watch Video</a>';
                 $('#answer-card-inner').html(videoHtml);
-            } else if (answerType === 'Image'){
+              } else if (answerType === 'image'){
                 var imageHtml = '<img src="' + answerImage + '" style="width: 100%;">';
                 $('#answer-card-inner').html(imageHtml);
             } 
