@@ -5,6 +5,7 @@
 #  id          :bigint           not null, primary key
 #  answer_type :string(255)
 #  card_code   :integer
+#  image_url   :string(255)
 #  text_answer :text(65535)
 #  video_link  :text(65535)
 #  created_at  :datetime         not null
@@ -23,4 +24,5 @@ class GameAnswer < ApplicationRecord
   has_one_attached :image_answer #active storage
 
   belongs_to :game
+  validates :image_url, format: { with: URI::regexp(%w[http https]) }, allow_blank: true
 end

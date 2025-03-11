@@ -52,6 +52,7 @@ gem 'active_storage_validations'
 
 # Use Pagy to add paginated results [https://github.com/ddnexus/pagy]
 gem "pagy"
+gem "pry"
 # Use Ransack to enable the creation of search forms for your application [https://github.com/activerecord-hackery/ransack]
 gem "ransack"
 # Spreadsheet Architect is a library that allows you to create XLSX, ODS, or CSV spreadsheets super easily [https://github.com/westonganger/spreadsheet_architect]

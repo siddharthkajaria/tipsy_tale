@@ -74,14 +74,12 @@
             dataType: 'json',
             data: { code: code, slug: slug },
             success: function(response) {
-                // Handle the response based on answer_type
-                var answerType = response.answer_type;
+              var answerType = response.answer_type?.toLowerCase();
 
                 var answerText = response.text_answer;
                 var answerVideo = response.video_link;
                 var answerImage = response.image_answer ? response.image_answer : undefined;
-
-                console.log()
+                var answerImageUrl = response.image_url ? response.image_url : undefined;
 
                 $('#answer-card').removeClass('d-none');
                 $('#answer-card-label').removeClass('d-none');
@@ -89,18 +87,31 @@
 
                 // Show/hide div based on answer_type
                 $('#answer-card').removeClass('d-none');
-                if (answerType === 'text') {
-                $('#answer-card-inner').html('<strong><p>' + answerText + '</p></strong>');
-            } else if (answerType === 'video') {
-                var videoHtml = '<a href="' + answerVideo + '" class="btn" style="background-color:#CF4B83; color:#fff" target="_blank"><i class="fa-regular fa-circle-play" style="margin-right:7px; color:#fff"></i> Watch Video</a>';
-                $('#answer-card-inner').html(videoHtml);
-            } else if (answerType === 'Image'){
-                var imageHtml = '<img src="' + answerImage + '" style="width: 100%;">';
-                $('#answer-card-inner').html(imageHtml);
-            } 
-            else {
-                console.error('Unknown answer type:', answerType);
-            }
+              
+                if (answerText) {
+                  $('#answer-card-inner').html('<strong><h3>' + answerText + '</h3></strong>');
+              }
+              
+              if (answerType === 'video') {
+                  var videoHtml = '<a href="' + answerVideo + '" class="btn" style="background-color:#CF4B83; color:#fff" target="_blank"><i class="fa-regular fa-circle-play" style="margin-right:7px; color:#fff"></i> Watch Video</a>';
+                  $('#answer-card-inner').append(videoHtml); // ✅ Use append instead of replacing content
+              } 
+              else if (answerType === 'image') {
+                  var imageHtml = '';
+              
+                  if (answerImage) {
+                      imageHtml = '<img src="' + answerImage + '" style="width: 100%;">';
+                  } else if (answerImageUrl) {
+                      imageHtml = '<img src="' + answerImageUrl + '" style="width: 100%;">';
+                  } else {
+                      imageHtml = '<p>No Image Found</p>';
+                  }
+              
+                  $('#answer-card-inner').append(imageHtml); // ✅ Append image content instead of replacing
+              } 
+              else {
+                  console.error('Unknown answer type:', answerType);
+              }
             
             },
             error: function(xhr, status, error) {

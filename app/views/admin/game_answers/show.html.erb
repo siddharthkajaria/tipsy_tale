@@ -29,13 +29,18 @@
           
           <dt class="col-md-3">Video Link</dt>
           <dd class="col-md-9"><%= @game_answer.video_link %></dd>
+          <dt class="col-md-3">Image Link</dt>
+          <dd class="col-md-9"><%= @game_answer.image_url %></dd>
 
           <dt class="col-md-3">Image answer</dt>
+
           <% if @game_answer.image_answer.attached? %>
-            <dd class="col-md-9"><%= image_tag @game_answer.image_answer, style: "width: 100px; height: 100px;" %></span></dd>
-          <% else %>
-            <dd class="col-md-9"></dd>
-          <% end %>
+          <dd class="col-md-9"><%= image_tag @game_answer.image_answer, style: "width: 100px; height: 100px;" %></span></dd>
+        <% elsif @game_answer.image_url.present? %>
+          <dd><%= image_tag @game_answer.image_url,style: "width: 100px; height: 100px;" %></dd>
+        <% else %>
+        <dd class="col-md-9"></dd>
+        <% end %>
         </dl>
       </div>
     </div>

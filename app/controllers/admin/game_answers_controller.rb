@@ -17,31 +17,41 @@ class Admin::GameAnswersController < Admin::BaseController
 
   def upload_excel
     file = params[:excel_file]
-
+  
     if file.present?
       # Process the file here (e.g., using the Roo gem to parse Excel files)
       spreadsheet = Roo::Spreadsheet.open(file.path)
       header = spreadsheet.row(1)
-
+  
       (2..spreadsheet.last_row).each do |i|
         row = Hash[[header, spreadsheet.row(i)].transpose]
-        # Assuming your GameAnswer model has attributes :card_code, :answer_type, :text_answer, :img_answer
+  
+        # Find and delete existing game answers with the same card_code
+        @game.game_answers.where(card_code: row['card_code']).destroy_all
+  
+        # Assuming your GameAnswer model has attributes :card_code, :answer_type, :text_answer, :video_link
         game_answer = @game.game_answers.new(
           card_code: row['card_code'],
           answer_type: row['answer_type'],
           text_answer: row['text_answer'],
-          video_link: row['video_link']
-
+          video_link: row['video_link'],
+          image_url: row['image_link']
         )
-        game_answer.save!
+  
+        if game_answer.save
+          # Handle saving success if needed, for example logging or additional actions
+        else
+          # Handle error if needed, like logging or adding validation messages
+          raise "Failed to save game_answer with card_code #{row['card_code']}"
+        end
       end
+  
       render json: { message: 'File processed successfully' }, status: :ok
     else
       render json: { error: 'No file uploaded' }, status: :unprocessable_entity
     end
   rescue => e
     render json: { error: e.message }, status: :unprocessable_entity
-    
   end
   
   def create
@@ -81,6 +91,6 @@ class Admin::GameAnswersController < Admin::BaseController
   end
 
   def game_answer_params
-    params.require(:game_answer).permit(:card_code,:answer_type,:text_answer,:video_link,:img_answer, :image_answer)
+    params.require(:game_answer).permit(:card_code,:answer_type,:text_answer,:image_url,:video_link,:img_answer, :image_answer)
   end
 end

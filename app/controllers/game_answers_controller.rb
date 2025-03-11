@@ -13,6 +13,7 @@ class GameAnswersController < ApplicationController
       answer_type: @game_answer.answer_type,
       text_answer: @game_answer.text_answer,
       video_link: @game_answer.video_link,
+      image_url: @game_answer.image_url,
       image_answer: @game_answer.image_answer.attached? ? url_for(@game_answer.image_answer) : nil
     }
     # render json: @game_answer.to_json
