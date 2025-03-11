@@ -74,7 +74,6 @@
             dataType: 'json',
             data: { code: code, slug: slug },
             success: function(response) {
-              console.log(response);
               var answerType = response.answer_type?.toLowerCase();
 
                 var answerText = response.text_answer;
