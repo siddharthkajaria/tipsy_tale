@@ -80,7 +80,7 @@ Rails.application.configure do
 
   config.hosts = [
     # Allow connections to production server.
-  "games.thetipsytale.com"
+    "games.thetipsytale.com",
 
     # Allow connections to local server.
     "127.0.0.1",
