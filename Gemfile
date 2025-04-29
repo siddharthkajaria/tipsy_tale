@@ -62,6 +62,8 @@ gem "cssbundling-rails", "~> 1.1"
 
 gem "terser", "~> 1.1"
 
+gem 'rack-cors'
+
 gem "devise"
 gem "roo", "~> 2.10.0"
 gem 'state_machines-activerecord', '~> 0.9.0'

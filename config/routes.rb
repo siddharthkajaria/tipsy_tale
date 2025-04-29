@@ -3,6 +3,12 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {
     sessions: 'admin/sessions'
   }
+  
+  namespace :api do
+    namespace :v1 do
+      resources :uploads, only: [:create]
+    end
+  end
 
   namespace :admin do
     get    '/',        to: 'games#index'
