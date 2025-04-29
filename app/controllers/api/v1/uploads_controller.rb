@@ -1,5 +1,6 @@
 class Api::V1::UploadsController < ApplicationController
     protect_from_forgery with: :null_session # Disable CSRF for API requests
+    before_action :set_cors_headers
 
       def create
         if params[:image].present?
@@ -22,4 +23,12 @@ class Api::V1::UploadsController < ApplicationController
           render json: { success: false, error: "No image uploaded" }, status: :bad_request
         end
       end
+
+      private
+
+    def set_cors_headers
+        response.set_header('Access-Control-Allow-Origin', 'https://www.thetipsytale.com')
+        response.set_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        response.set_header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization')
+    end
 end
